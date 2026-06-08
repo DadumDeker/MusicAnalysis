@@ -115,18 +115,16 @@ and generate smart playlists.
 
 ## Configuration
 
-Most scripts have a clear CONFIG section at the top with paths and toggles:
+All directory paths are defined in `src/music_analysis/paths.py` and imported
+by every script. Per-script toggles remain in each file's CONFIG section:
 
 - preprocess.py: TARGET_SR, FORCE_MONO, APPLY_LOUDNORM, OVERWRITE
-- run_pipeline.py: timeout and logging paths
 - CLAPprocess.py: candidate description list for tagging
 
 ---
 
 ## Current Limitations & Known Issues
 
-- Audio path inconsistency: Dashboard looks for audio in audio_raw/,
-  but processed files live in audio_processed/.
 - Semantic search is not yet vector-based: dashboard.py and search_tracks.py
   use fuzzy text matching + random scoring. The FAISS index exists but is not integrated.
 - Embeddings functionality note: I was unable to get the deep embeddings

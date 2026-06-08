@@ -3,20 +3,20 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+from music_analysis.paths import (
+    AUDIO_PROCESSED_DIR,
+    AUDIO_RAW_DIR,
+    LOG_DIR,
+    REPO_ROOT,
+)
+
 # ====================== CONFIG ======================
-BASE_DIR = Path(__file__).parent.resolve()
+RAW_DIR = AUDIO_RAW_DIR
+PROCESSED_DIR = AUDIO_PROCESSED_DIR
 
-RAW_DIR = BASE_DIR / "audio_raw"
-PROCESSED_DIR = BASE_DIR / "audio_processed"
-METADATA_DIR = BASE_DIR / "metadata"
-LOG_DIR = BASE_DIR / "logs"
-
-for folder in [PROCESSED_DIR, METADATA_DIR, LOG_DIR]:
-    folder.mkdir(exist_ok=True)
-
-PREPROCESS_SCRIPT = BASE_DIR / "preprocess.py"
-ESSENTIA_SCRIPT = BASE_DIR / "EssentiaProcess.py"
-CLAP_SCRIPT = BASE_DIR / "CLAPprocess.py"
+PREPROCESS_SCRIPT = REPO_ROOT / "preprocess.py"
+ESSENTIA_SCRIPT = REPO_ROOT / "EssentiaProcess.py"
+CLAP_SCRIPT = REPO_ROOT / "CLAPprocess.py"
 
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
 ERROR_LOG = LOG_DIR / f"pipeline_error_{TIMESTAMP}.log"
@@ -71,7 +71,7 @@ def main():
     print("=" * 80)
     print("🎬 FULL AUDIO ANALYSIS PIPELINE")
     print("=" * 80)
-    print(f"Working directory: {BASE_DIR}\n")
+    print(f"Working directory: {REPO_ROOT}\n")
 
     # 1. Preprocessing (FFmpeg)
     if RAW_DIR.exists() and any(RAW_DIR.iterdir()):

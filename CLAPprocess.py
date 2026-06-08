@@ -5,11 +5,10 @@ import torch
 from transformers import AutoModel, AutoProcessor
 
 from music_analysis.features import Features
+from music_analysis.paths import AUDIO_PROCESSED_DIR, METADATA_DIR
 
 # ====================== CONFIG ======================
-BASE_DIR = Path(__file__).parent.resolve()
-METADATA_DIR = BASE_DIR / "metadata"
-AUDIO_DIR = BASE_DIR / "audio_processed"
+AUDIO_DIR = AUDIO_PROCESSED_DIR
 
 MODEL_NAME = "laion/clap-htsat-unfused"
 # ===================================================

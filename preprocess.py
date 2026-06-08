@@ -5,12 +5,11 @@ from typing import Optional
 
 from tqdm import tqdm
 
-# ====================== CONFIG ======================
-BASE_DIR = Path(__file__).parent.resolve()
+from music_analysis.paths import AUDIO_PROCESSED_DIR, AUDIO_RAW_DIR
 
-RAW_DIR = BASE_DIR / "audio_raw"
-PROCESSED_DIR = BASE_DIR / "audio_processed"
-PROCESSED_DIR.mkdir(exist_ok=True)
+# ====================== CONFIG ======================
+RAW_DIR = AUDIO_RAW_DIR
+PROCESSED_DIR = AUDIO_PROCESSED_DIR
 
 SUPPORTED_EXTENSIONS = {
     ".mp3",

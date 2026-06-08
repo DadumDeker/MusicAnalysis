@@ -1,16 +1,13 @@
 import pickle
-from pathlib import Path
 
 import faiss
 import numpy as np
 from tqdm import tqdm
 
 from music_analysis.features import Features
+from music_analysis.paths import METADATA_DIR, VECTOR_INDEX_DIR
 
-BASE_DIR = Path(__file__).parent.resolve()
-METADATA_DIR = BASE_DIR / "metadata"
-INDEX_DIR = BASE_DIR / "vector_index"
-INDEX_DIR.mkdir(exist_ok=True)
+INDEX_DIR = VECTOR_INDEX_DIR
 
 
 def build_index():

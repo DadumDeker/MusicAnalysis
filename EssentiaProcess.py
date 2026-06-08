@@ -4,15 +4,10 @@ import essentia.standard as es
 from essentia import Pool
 
 from music_analysis.features import Features
+from music_analysis.paths import AUDIO_PROCESSED_DIR, METADATA_DIR, MODELS_DIR
 
 # ====================== CONFIG ======================
-BASE_DIR = Path(__file__).parent.resolve()
-
-AUDIO_DIR = BASE_DIR / "audio_processed"
-METADATA_DIR = BASE_DIR / "metadata"
-MODELS_DIR = BASE_DIR / "models"
-
-METADATA_DIR.mkdir(exist_ok=True)
+AUDIO_DIR = AUDIO_PROCESSED_DIR
 
 print(f"Models folder: {MODELS_DIR.resolve()}\n")
 # ===================================================

@@ -19,13 +19,13 @@
 import random
 from collections import Counter
 from difflib import SequenceMatcher
-from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
 import streamlit as st
 
 from music_analysis.features import Features
+from music_analysis.paths import AUDIO_PROCESSED_DIR, METADATA_DIR
 
 # ============================================================
 # PAGE CONFIG
@@ -153,7 +153,7 @@ def load_data() -> pd.DataFrame:
 
     tracks = []
 
-    for f in Path("metadata").glob("*.json"):
+    for f in METADATA_DIR.glob("*.json"):
         try:
             track = Features.load(f).to_dict()
 
@@ -369,8 +369,8 @@ with left:
 
         audio_file = None
 
-        for ext in [".mp3", ".wav", ".flac", ".m4a"]:
-            p = Path("audio_raw") / (f"{track['track_name']}{ext}")
+        for ext in [".wav", ".mp3", ".flac", ".m4a"]:
+            p = AUDIO_PROCESSED_DIR / f"{track['track_name']}{ext}"
 
             if p.exists():
                 audio_file = p

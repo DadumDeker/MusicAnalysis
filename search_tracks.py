@@ -1,14 +1,13 @@
 import pickle
-from pathlib import Path
 
 import faiss
 import numpy as np
 
 from music_analysis.features import Features
+from music_analysis.paths import VECTOR_INDEX_DIR
 
 # ====================== CONFIG ======================
-BASE_DIR = Path(__file__).parent.resolve()
-INDEX_DIR = BASE_DIR / "vector_index"
+INDEX_DIR = VECTOR_INDEX_DIR
 
 # Load index and metadata
 index = faiss.read_index(str(INDEX_DIR / "tracks_index.faiss"))
