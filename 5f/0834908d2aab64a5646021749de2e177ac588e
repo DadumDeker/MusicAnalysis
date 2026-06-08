@@ -1,0 +1,44 @@
+pyproject.toml
+  s_a514a309c7e7f8::t_ce828e3091db78 70-72
+docs/setup.md
+  h_b891736ee508d1 40-44
+  s_a514a309c7e7f8::t_022349335e969e 45-46
+  s_a514a309c7e7f8::t_81278c06964964 47
+.gitignore
+  h_b891736ee508d1 7-9
+  s_0632e457032744::t_263381e4ff7d64 6
+scripts/gen_essentia_stubs.py
+  s_a514a309c7e7f8::t_ac9da4f2926b77 307-312
+  s_a514a309c7e7f8::t_d3309ff597e6b9 184
+  s_a514a309c7e7f8::t_bb77fc48778958 23
+  s_a514a309c7e7f8::t_dc74acaa55500c 1-22,24-70,72-84,86-106,108-183,185-280,282-285,287-306,313-319
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "5f0834908d2aab64a5646021749de2e177ac588e",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_0632e457032744": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b1a66e93-b4cf-4692-9734-43c9554e131a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    },
+    "s_a514a309c7e7f8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b596b7a-e4e4-404b-a4c0-c4b165804a3c",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
