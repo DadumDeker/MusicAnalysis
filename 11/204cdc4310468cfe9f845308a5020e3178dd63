@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "11204cdc4310468cfe9f845308a5020e3178dd63",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
