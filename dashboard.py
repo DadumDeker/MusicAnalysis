@@ -16,7 +16,6 @@
 #
 # ============================================================
 
-import json
 import random
 from collections import Counter
 from difflib import SequenceMatcher
@@ -25,6 +24,8 @@ from pathlib import Path
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+
+from features import Features
 
 # ============================================================
 # PAGE CONFIG
@@ -154,31 +155,30 @@ def load_data() -> pd.DataFrame:
 
     for f in Path("metadata").glob("*.json"):
         try:
-            with open(f, "r", encoding="utf-8") as file:
-                track = json.load(file)
+            track = Features.load(f).to_dict()
 
-                track.setdefault("bpm", 0)
-                track.setdefault("danceability", 0)
-                track.setdefault("key", "N/A")
-                track.setdefault("scale", "")
-                track.setdefault("track_name", "Unknown")
+            track.setdefault("bpm", 0)
+            track.setdefault("danceability", 0)
+            track.setdefault("key", "N/A")
+            track.setdefault("scale", "")
+            track.setdefault("track_name", "Unknown")
 
-                # FIX DANCEABILITY
-                dance = track.get("danceability", 0)
+            # FIX DANCEABILITY
+            dance = track.get("danceability", 0)
 
-                try:
-                    dance = float(dance)
-                except Exception:
-                    dance = 0
+            try:
+                dance = float(dance)
+            except Exception:
+                dance = 0
 
-                if dance > 1:
-                    dance = dance / 100
+            if dance > 1:
+                dance = dance / 100
 
-                dance = min(max(dance, 0), 1)
+            dance = min(max(dance, 0), 1)
 
-                track["danceability"] = dance
+            track["danceability"] = dance
 
-                tracks.append(track)
+            tracks.append(track)
 
         except Exception:
             pass

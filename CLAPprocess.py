@@ -1,9 +1,10 @@
-import json
 from pathlib import Path
 
 import essentia.standard as es
 import torch
 from transformers import AutoModel, AutoProcessor
+
+from features import Features
 
 # ====================== CONFIG ======================
 BASE_DIR = Path(__file__).parent.resolve()
@@ -94,23 +95,18 @@ def main():
 
     for json_file in json_files:
         try:
-            with open(json_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
+            track = Features.load(json_file)
 
-            wav_path = AUDIO_DIR / f"{data['track_name']}.wav"
+            wav_path = AUDIO_DIR / f"{track.track_name}.wav"
             if not wav_path.exists():
                 print(f"⚠️ Missing wav: {wav_path.name}")
                 continue
 
-            print(f"CLAP analyzing: {data['track_name'][:70]}...")
-            clap_results = get_clap_matches(wav_path)
+            print(f"CLAP analyzing: {track.track_name[:70]}...")
+            track.clap_matches = get_clap_matches(wav_path)
+            track.save(METADATA_DIR)
 
-            data["clap_matches"] = clap_results
-
-            with open(json_file, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2)
-
-            print(f"   ✓ Added {len(clap_results)} descriptions\n")
+            print(f"   ✓ Added {len(track.clap_matches)} descriptions\n")
 
         except Exception as e:
             print(f"❌ Error on {json_file.name}: {e}")

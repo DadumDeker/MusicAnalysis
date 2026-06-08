@@ -4,6 +4,8 @@ from pathlib import Path
 import faiss
 import numpy as np
 
+from features import Features
+
 # ====================== CONFIG ======================
 BASE_DIR = Path(__file__).parent.resolve()
 INDEX_DIR = BASE_DIR / "vector_index"
@@ -22,15 +24,13 @@ def search(query: str = None, track_name: str = None, top_k: int = 10):
 
     # For now, we do a simple random / basic search (since we don't have query vector)
     # We'll improve this once the index is stable
-    results = []
-    for i, track in enumerate(metadata):
+    results: list[tuple[float, Features]] = []
+    for track in metadata:
         score = np.random.random()  # placeholder
 
         if query:
             # Very basic text match on CLAP descriptions
-            clap_text = " ".join(
-                [m["description"] for m in track.get("clap_matches", [])]
-            ).lower()
+            clap_text = " ".join([m["description"] for m in track.clap_matches]).lower()
             if query.lower() in clap_text:
                 score += 0.5
 
@@ -41,13 +41,11 @@ def search(query: str = None, track_name: str = None, top_k: int = 10):
 
     print(f"Top {top_k} results:\n")
     for rank, (score, track) in enumerate(results[:top_k], 1):
-        print(f"{rank:2d}. {track['track_name']}")
-        print(
-            f"    BPM: {track.get('bpm')} | Key: {track.get('key')}{track.get('scale', '')}"
-        )
+        print(f"{rank:2d}. {track.track_name}")
+        print(f"    BPM: {track.bpm} | Key: {track.key}{track.scale or ''}")
 
-        if "clap_matches" in track and track["clap_matches"]:
-            best = max(track["clap_matches"], key=lambda x: x["score"])
+        if track.clap_matches:
+            best = max(track.clap_matches, key=lambda x: x["score"])
             print(f"    CLAP: {best['description']} ({best['score']:.3f})")
         print("-" * 70)
 

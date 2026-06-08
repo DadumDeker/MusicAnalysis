@@ -1,10 +1,11 @@
-import json
 import pickle
 from pathlib import Path
 
 import faiss
 import numpy as np
 from tqdm import tqdm
+
+from features import Features
 
 BASE_DIR = Path(__file__).parent.resolve()
 METADATA_DIR = BASE_DIR / "metadata"
@@ -21,14 +22,13 @@ def build_index():
 
     for json_file in tqdm(json_files):
         try:
-            with open(json_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
+            track = Features.load(json_file)
 
-            if "clap_matches" not in data or not data["clap_matches"]:
+            if not track.clap_matches:
                 continue
 
             # Create a simple vector from CLAP scores
-            scores = [m["score"] for m in data["clap_matches"]]
+            scores = [m["score"] for m in track.clap_matches]
             vector = np.array(scores, dtype=np.float32)
 
             # Pad to fixed length (8)
@@ -38,7 +38,7 @@ def build_index():
                 vector = vector[:8]
 
             vectors.append(vector)
-            metadata.append(data)
+            metadata.append(track)
 
         except Exception as e:
             print(f"   Skipped {json_file.name}: {e}")
