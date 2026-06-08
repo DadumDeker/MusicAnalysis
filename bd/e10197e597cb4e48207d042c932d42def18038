@@ -1,0 +1,39 @@
+pyproject.toml
+  s_a514a309c7e7f8::t_2141a91a1520a2 30
+  s_a55c7cfd032d3e::t_7e827c1da3d9b8 37
+  s_a55c7cfd032d3e::t_9a848ae2ba0f8e 36,38
+  s_a55c7cfd032d3e::t_bae3644bdc9b08 33
+uv.lock
+  s_a55c7cfd032d3e::t_1b13bcb10e32ee 54-76,787-806,907,936,941-973,1404-1412,2048-2054
+.pre-commit-config.yaml
+  s_a55c7cfd032d3e::t_d6b7a8ffa9c434 13-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "bde10197e597cb4e48207d042c932d42def18038",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_a514a309c7e7f8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b596b7a-e4e4-404b-a4c0-c4b165804a3c",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    },
+    "s_a55c7cfd032d3e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e9d78a02-3ee3-45a2-9e14-6d8e82bc5524",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
