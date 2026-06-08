@@ -1,0 +1,49 @@
+src/music_analysis/paths.py
+  s_55c8fbb2c12ffc::t_979b3fa64143c5 1-2,11-12,14-23
+dashboard.py
+  s_55c8fbb2c12ffc::t_979b3fa64143c5 28,156,372-373
+search_tracks.py
+  s_55c8fbb2c12ffc::t_979b3fa64143c5 7,10
+build_vector_db.py
+  s_55c8fbb2c12ffc::t_979b3fa64143c5 8,10
+preprocess.py
+  s_55c8fbb2c12ffc::t_979b3fa64143c5 8,10-12
+run_pipeline.py
+  s_55c8fbb2c12ffc::t_979b3fa64143c5 6-11,13-15,17-19
+  s_2362c551cd4c9f::t_e1dacc9c5f471c 74
+EssentiaProcess.py
+  s_55c8fbb2c12ffc::t_979b3fa64143c5 7,10
+CLAPprocess.py
+  s_55c8fbb2c12ffc::t_979b3fa64143c5 8,11
+README.md
+  s_2362c551cd4c9f::t_53ec8f6a70c657 118-119
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "513c0498dab80218d061ffa3c37ec0392a64e0f4",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_2362c551cd4c9f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85f25e38-681c-4727-b912-c01c1522491b",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    },
+    "s_55c8fbb2c12ffc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f835ccfe-8bf7-4dbf-b9f5-79656f8eda00",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
