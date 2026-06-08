@@ -8,15 +8,45 @@ dependencies = [
     "essentia>=2.1b6.dev1389",
     "essentia-tensorflow>=2.1b6.dev1389",
     "faiss-gpu>=1.7.2",
+    "internetarchive>=5.9.0",
     "numpy>=2.2.6",
     "pandas>=2.3.3",
     "pillow>=12.2.0",
     "plotly>=6.7.0",
     "rapidfuzz>=3.14.5",
+    "rich>=15.0.0",
     "static-ffmpeg>=3.0",
     "streamlit>=1.57.0",
     "tensorflow[and-cuda]>=2.21.0",
     "torch>=2.12.0",
     "tqdm>=4.67.3",
     "transformers>=5.8.1",
+    "typer>=0.25.1",
 ]
+
+[dependency-groups]
+dev = ["ruff>=0.15.5"]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+extend-select = [
+    "ANN", # flake8-annotations
+    "I",   # isort-style sorting
+    "W",   # pycodestyle warnings (e.g. trailing whitespace)
+]
+extend-safe-fixes = [
+    "W291", # trailing whitespace
+    "W293", # blank line contains whitespace
+]
+ignore = [
+    "ANN401", # Usage of `typing.Any`
+]
+
+[tool.ruff.lint.flake8-annotations]
+suppress-dummy-args = true
+suppress-none-returning = true
+
+[tool.ruff.lint.isort]
+known-third-party = []
