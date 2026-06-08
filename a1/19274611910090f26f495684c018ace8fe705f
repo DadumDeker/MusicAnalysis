@@ -1,0 +1,28 @@
+.pre-commit-config.yaml
+  s_4bbd6b6a36ab5c::t_afaa6e7a51e26d 1-12
+pyproject.toml
+  s_4bbd6b6a36ab5c::t_3fa2ba93d475ea 28-31
+uv.lock
+  s_4bbd6b6a36ab5c::t_d7d86a064551be 129-136,273-281,549-557,862,888-891,944-952,1342-1350,1364-1379,1462-1474,2087-2100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "a119274611910090f26f495684c018ace8fe705f",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_4bbd6b6a36ab5c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b130316d-4219-4901-9942-64c88d39165a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
