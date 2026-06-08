@@ -1,0 +1,19 @@
+run_pipeline.py
+  s_4abe90bf504c19::t_ada783f63673c9 44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "144aebdaf088886d2f7f1959a2f86ec2cda00380",
+  "prompts": {},
+  "sessions": {
+    "s_4abe90bf504c19": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "77aa3a1a-a31f-4daa-8ad9-2b4124eeda04",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
