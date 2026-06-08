@@ -1,14 +1,16 @@
-from pathlib import Path
 import json
-import numpy as np
-import faiss
 import pickle
+from pathlib import Path
+
+import faiss
+import numpy as np
 from tqdm import tqdm
 
 BASE_DIR = Path(__file__).parent.resolve()
 METADATA_DIR = BASE_DIR / "metadata"
 INDEX_DIR = BASE_DIR / "vector_index"
 INDEX_DIR.mkdir(exist_ok=True)
+
 
 def build_index():
     vectors = []
@@ -28,7 +30,7 @@ def build_index():
             # Create a simple vector from CLAP scores
             scores = [m["score"] for m in data["clap_matches"]]
             vector = np.array(scores, dtype=np.float32)
-            
+
             # Pad to fixed length (8)
             if len(vector) < 8:
                 vector = np.pad(vector, (0, 8 - len(vector)), constant_values=0.0)

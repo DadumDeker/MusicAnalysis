@@ -1,5 +1,6 @@
-from pathlib import Path
 import json
+from pathlib import Path
+
 import essentia.standard as es
 from essentia import Pool
 
@@ -15,9 +16,11 @@ METADATA_DIR.mkdir(exist_ok=True)
 print(f"Models folder: {MODELS_DIR.resolve()}\n")
 # ===================================================
 
-def extract_features(audio_path: Path):
+
+# TODO (joshua-dean1_ecolab): return typed dict or dataclass
+def extract_features(audio_path: Path) -> dict:
     print(f"\nAnalyzing: {audio_path.name}")
-    
+
     audio_48k = es.MonoLoader(filename=str(audio_path), sampleRate=48000)()
     audio_16k = es.MonoLoader(filename=str(audio_path), sampleRate=16000)()
 
@@ -28,14 +31,16 @@ def extract_features(audio_path: Path):
         bpm, _, _, _, _ = es.RhythmExtractor2013(method="multifeature")(audio_48k)
         key, scale, key_strength = es.KeyExtractor()(audio_48k)
 
-        features.update({
-            "bpm": round(float(bpm), 2),
-            "key": key,
-            "scale": scale,
-            "key_strength": round(float(key_strength), 4),
-            "loudness": round(float(es.Loudness()(audio_48k)), 4),
-            "danceability": round(float(es.Danceability()(audio_48k)[0]), 4),
-        })
+        features.update(
+            {
+                "bpm": round(float(bpm), 2),
+                "key": key,
+                "scale": scale,
+                "key_strength": round(float(key_strength), 4),
+                "loudness": round(float(es.Loudness()(audio_48k)), 4),
+                "danceability": round(float(es.Danceability()(audio_48k)[0]), 4),
+            }
+        )
     except Exception as e:
         print(f"   Basic features error: {e}")
 
@@ -50,7 +55,9 @@ def extract_features(audio_path: Path):
             effnet_emb = effnet(audio_16k)
             features["effnet_embedding"] = effnet_emb.mean(axis=0).tolist()
             pool.set("embeddings", effnet_emb)
-            print(f"   ✅ EffNet embedding saved ({len(features['effnet_embedding'])} dims)")
+            print(
+                f"   ✅ EffNet embedding saved ({len(features['effnet_embedding'])} dims)"
+            )
         except Exception as e:
             print(f"   ❌ EffNet failed: {e}")
     else:
@@ -61,19 +68,18 @@ def extract_features(audio_path: Path):
     if vggish_path.exists():
         try:
             vggish = es.TensorflowPredictVGGish(
-                graphFilename=str(vggish_path),
-                output="model/vggish/embeddings"
+                graphFilename=str(vggish_path), output="model/vggish/embeddings"
             )
             vggish_emb = vggish(audio_16k)
             features["vggish_embedding"] = vggish_emb.mean(axis=0).tolist()
-            print(f"   ✅ VGGish embedding saved")
+            print("   ✅ VGGish embedding saved")
         except Exception as e:
             print(f"   ❌ VGGish failed: {e}")
 
     return features
 
 
-def save_features(features):
+def save_features(features: dict):
     output_path = METADATA_DIR / f"{features['track_name']}.json"
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(features, f, indent=2)

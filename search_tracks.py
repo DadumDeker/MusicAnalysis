@@ -1,7 +1,8 @@
-from pathlib import Path
 import pickle
-import numpy as np
+from pathlib import Path
+
 import faiss
+import numpy as np
 
 # ====================== CONFIG ======================
 BASE_DIR = Path(__file__).parent.resolve()
@@ -15,6 +16,7 @@ with open(INDEX_DIR / "metadata.pkl", "rb") as f:
 print(f"✅ Loaded {len(metadata)} tracks\n")
 # ===================================================
 
+
 def search(query: str = None, track_name: str = None, top_k: int = 10):
     print(f"\n🔍 Searching for: {query or track_name}\n")
 
@@ -23,10 +25,12 @@ def search(query: str = None, track_name: str = None, top_k: int = 10):
     results = []
     for i, track in enumerate(metadata):
         score = np.random.random()  # placeholder
-        
+
         if query:
             # Very basic text match on CLAP descriptions
-            clap_text = " ".join([m["description"] for m in track.get("clap_matches", [])]).lower()
+            clap_text = " ".join(
+                [m["description"] for m in track.get("clap_matches", [])]
+            ).lower()
             if query.lower() in clap_text:
                 score += 0.5
 
@@ -38,8 +42,10 @@ def search(query: str = None, track_name: str = None, top_k: int = 10):
     print(f"Top {top_k} results:\n")
     for rank, (score, track) in enumerate(results[:top_k], 1):
         print(f"{rank:2d}. {track['track_name']}")
-        print(f"    BPM: {track.get('bpm')} | Key: {track.get('key')}{track.get('scale','')}")
-        
+        print(
+            f"    BPM: {track.get('bpm')} | Key: {track.get('key')}{track.get('scale', '')}"
+        )
+
         if "clap_matches" in track and track["clap_matches"]:
             best = max(track["clap_matches"], key=lambda x: x["score"])
             print(f"    CLAP: {best['description']} ({best['score']:.3f})")
@@ -48,7 +54,9 @@ def search(query: str = None, track_name: str = None, top_k: int = 10):
 
 def main():
     print("=== Simple Music Search (Stable Version) ===")
-    print("Type a keyword like: psytrance, dark, melodic, festival, night drive, etc.\n")
+    print(
+        "Type a keyword like: psytrance, dark, melodic, festival, night drive, etc.\n"
+    )
 
     while True:
         q = input("\nSearch: ").strip()

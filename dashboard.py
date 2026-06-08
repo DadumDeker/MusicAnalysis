@@ -16,32 +16,30 @@
 #
 # ============================================================
 
-import streamlit as st
-import pandas as pd
-import numpy as np
 import json
-from pathlib import Path
+import random
 from collections import Counter
 from difflib import SequenceMatcher
+from pathlib import Path
+
+import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
-import random
+import streamlit as st
 
 # ============================================================
 # PAGE CONFIG
 # ============================================================
 
 st.set_page_config(
-    page_title="AI Music Intelligence",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    page_title="AI Music Intelligence", layout="wide", initial_sidebar_state="expanded"
 )
 
 # ============================================================
 # CUSTOM CSS
 # ============================================================
 
-st.markdown("""
+st.markdown(
+    """
 <style>
 
 html, body, [class*="css"] {
@@ -140,22 +138,23 @@ section[data-testid="stSidebar"] {
 }
 
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # ============================================================
 # LOAD DATA
 # ============================================================
 
+
 @st.cache_data
-def load_data():
+def load_data() -> pd.DataFrame:
 
     tracks = []
 
     for f in Path("metadata").glob("*.json"):
-
         try:
             with open(f, "r", encoding="utf-8") as file:
-
                 track = json.load(file)
 
                 track.setdefault("bpm", 0)
@@ -169,7 +168,7 @@ def load_data():
 
                 try:
                     dance = float(dance)
-                except:
+                except Exception:
                     dance = 0
 
                 if dance > 1:
@@ -186,6 +185,7 @@ def load_data():
 
     return pd.DataFrame(tracks)
 
+
 df = load_data()
 
 if df.empty:
@@ -196,18 +196,24 @@ if df.empty:
 # HERO
 # ============================================================
 
-st.markdown("""
+st.markdown(
+    """
 <div class="big-title">
 AI MUSIC<br>
 INTELLIGENCE
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
-st.markdown("""
+st.markdown(
+    """
 <div class="subtitle">
 Semantic Discovery • Smart Playlists • Audio Intelligence • CLAP Search
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # ============================================================
 # SIDEBAR
@@ -216,35 +222,18 @@ Semantic Discovery • Smart Playlists • Audio Intelligence • CLAP Search
 st.sidebar.markdown("## 🎛 Discovery Engine")
 
 search_query = st.sidebar.text_input(
-    "Semantic Search",
-    placeholder="dark warehouse techno..."
+    "Semantic Search", placeholder="dark warehouse techno..."
 )
 
 bpm_min = int(df["bpm"].min())
 bpm_max = int(df["bpm"].max())
 
-bpm_range = st.sidebar.slider(
-    "BPM Range",
-    bpm_min,
-    bpm_max,
-    (bpm_min, bpm_max)
-)
+bpm_range = st.sidebar.slider("BPM Range", bpm_min, bpm_max, (bpm_min, bpm_max))
 
-min_dance = st.sidebar.slider(
-    "Minimum Danceability",
-    0.0,
-    1.0,
-    0.2
-)
+min_dance = st.sidebar.slider("Minimum Danceability", 0.0, 1.0, 0.2)
 
 sort_mode = st.sidebar.selectbox(
-    "Sort Results By",
-    [
-        "Similarity",
-        "Danceability",
-        "BPM",
-        "Track Name"
-    ]
+    "Sort Results By", ["Similarity", "Danceability", "BPM", "Track Name"]
 )
 
 # ============================================================
@@ -254,57 +243,34 @@ sort_mode = st.sidebar.selectbox(
 filtered = df.copy()
 
 filtered = filtered[
-    (filtered["bpm"] >= bpm_range[0]) &
-    (filtered["bpm"] <= bpm_range[1])
+    (filtered["bpm"] >= bpm_range[0]) & (filtered["bpm"] <= bpm_range[1])
 ]
 
-filtered = filtered[
-    filtered["danceability"] >= min_dance
-]
+filtered = filtered[filtered["danceability"] >= min_dance]
 
 scores = []
 
 for _, row in filtered.iterrows():
-
     score = 0
 
-    track_name = str(
-        row.get("track_name", "")
-    ).lower()
+    track_name = str(row.get("track_name", "")).lower()
 
     clap_text = ""
 
     if isinstance(row.get("clap_matches"), list):
-
-        clap_text = " ".join([
-            x.get("description", "")
-            for x in row["clap_matches"]
-        ]).lower()
+        clap_text = " ".join(
+            [x.get("description", "") for x in row["clap_matches"]]
+        ).lower()
 
     if search_query:
+        score += SequenceMatcher(None, search_query.lower(), track_name).ratio() * 100
 
-        score += (
-            SequenceMatcher(
-                None,
-                search_query.lower(),
-                track_name
-            ).ratio() * 100
-        )
-
-        score += (
-            SequenceMatcher(
-                None,
-                search_query.lower(),
-                clap_text
-            ).ratio() * 100
-        )
+        score += SequenceMatcher(None, search_query.lower(), clap_text).ratio() * 100
 
     else:
         score += random.randint(20, 80)
 
-    score += float(
-        row.get("danceability", 0)
-    ) * 100
+    score += float(row.get("danceability", 0)) * 100
 
     scores.append(score)
 
@@ -315,31 +281,16 @@ filtered["similarity_score"] = scores
 # ============================================================
 
 if sort_mode == "Similarity":
-
-    filtered = filtered.sort_values(
-        by="similarity_score",
-        ascending=False
-    )
+    filtered = filtered.sort_values(by="similarity_score", ascending=False)
 
 elif sort_mode == "Danceability":
-
-    filtered = filtered.sort_values(
-        by="danceability",
-        ascending=False
-    )
+    filtered = filtered.sort_values(by="danceability", ascending=False)
 
 elif sort_mode == "BPM":
-
-    filtered = filtered.sort_values(
-        by="bpm",
-        ascending=False
-    )
+    filtered = filtered.sort_values(by="bpm", ascending=False)
 
 elif sort_mode == "Track Name":
-
-    filtered = filtered.sort_values(
-        by="track_name"
-    )
+    filtered = filtered.sort_values(by="track_name")
 
 # ============================================================
 # METRICS
@@ -354,16 +305,10 @@ with m2:
     st.metric("Filtered", len(filtered))
 
 with m3:
-    st.metric(
-        "Avg BPM",
-        round(df["bpm"].mean(), 1)
-    )
+    st.metric("Avg BPM", round(df["bpm"].mean(), 1))
 
 with m4:
-    st.metric(
-        "Avg Danceability",
-        round(df["danceability"].mean(), 2)
-    )
+    st.metric("Avg Danceability", round(df["danceability"].mean(), 2))
 
 # ============================================================
 # MAIN LAYOUT
@@ -376,16 +321,12 @@ left, right = st.columns([2.4, 1])
 # ============================================================
 
 with left:
-
     st.markdown("## 🔎 Discovery Results")
 
     top_results = filtered.head(25)
 
     for _, track in top_results.iterrows():
-
-        similarity = int(
-            track["similarity_score"]
-        )
+        similarity = int(track["similarity_score"])
 
         bpm = track.get("bpm", "N/A")
 
@@ -393,17 +334,14 @@ with left:
 
         scale = track.get("scale", "")
 
-        dance = round(
-            track.get("danceability", 0),
-            2
-        )
+        dance = round(track.get("danceability", 0), 2)
 
         st.markdown(
             f"""
             <div class="track-card">
 
                 <h3 style="margin-bottom:10px;">
-                    {track['track_name']}
+                    {track["track_name"]}
                 </h3>
 
                 <span class="metric-pill">
@@ -424,23 +362,15 @@ with left:
 
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
         # AUDIO PLAYER
 
         audio_file = None
 
-        for ext in [
-            ".mp3",
-            ".wav",
-            ".flac",
-            ".m4a"
-        ]:
-
-            p = Path("audio_raw") / (
-                f"{track['track_name']}{ext}"
-            )
+        for ext in [".mp3", ".wav", ".flac", ".m4a"]:
+            p = Path("audio_raw") / (f"{track['track_name']}{ext}")
 
             if p.exists():
                 audio_file = p
@@ -451,57 +381,34 @@ with left:
 
         # CLAP TAGS
 
-        if isinstance(
-            track.get("clap_matches"),
-            list
-        ):
-
+        if isinstance(track.get("clap_matches"), list):
             tags = sorted(
-                track["clap_matches"],
-                key=lambda x: x.get("score", 0),
-                reverse=True
+                track["clap_matches"], key=lambda x: x.get("score", 0), reverse=True
             )[:4]
 
             cols = st.columns(len(tags))
 
             for c, t in zip(cols, tags):
-
                 with c:
-
-                    st.caption(
-                        f"🎧 {t['description']} "
-                        f"({t['score']:.2f})"
-                    )
+                    st.caption(f"🎧 {t['description']} ({t['score']:.2f})")
 
 # ============================================================
 # RIGHT COLUMN
 # ============================================================
 
 with right:
-
     st.markdown("## 🚀 Smart Playlist")
 
-    if st.button(
-        "Generate Intelligent Playlist",
-        use_container_width=True
-    ):
-
+    if st.button("Generate Intelligent Playlist", use_container_width=True):
         playlist = filtered.sort_values(
-            by=[
-                "similarity_score",
-                "danceability"
-            ],
-            ascending=False
+            by=["similarity_score", "danceability"], ascending=False
         ).head(20)
 
-        st.session_state["playlist"] = (
-            playlist.to_dict("records")
-        )
+        st.session_state["playlist"] = playlist.to_dict("records")
 
         st.session_state["playlist_index"] = 0
 
     if "playlist" in st.session_state:
-
         playlist = st.session_state["playlist"]
 
         idx = st.session_state["playlist_index"]
@@ -515,50 +422,33 @@ with right:
                 <h2>▶ NOW PLAYING</h2>
 
                 <h3>
-                    {current['track_name']}
+                    {current["track_name"]}
                 </h3>
 
                 <span class="metric-pill">
-                    {current.get('bpm')} BPM
+                    {current.get("bpm")} BPM
                 </span>
 
                 <span class="metric-pill">
-                    {current.get('key')}
+                    {current.get("key")}
                 </span>
 
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
-        if st.button(
-            "Next Track",
-            use_container_width=True
-        ):
-
-            st.session_state[
-                "playlist_index"
-            ] = (
-                idx + 1
-            ) % len(playlist)
+        if st.button("Next Track", use_container_width=True):
+            st.session_state["playlist_index"] = (idx + 1) % len(playlist)
 
             st.rerun()
 
         st.markdown("### Queue")
 
         for i, track in enumerate(playlist):
+            active = "▶️" if i == idx else "•"
 
-            active = (
-                "▶️"
-                if i == idx
-                else "•"
-            )
-
-            st.write(
-                f"{active} "
-                f"{track['track_name']} "
-                f"({track.get('bpm')} BPM)"
-            )
+            st.write(f"{active} {track['track_name']} ({track.get('bpm')} BPM)")
 
 # ============================================================
 # ANALYTICS
@@ -573,94 +463,61 @@ a1, a2 = st.columns(2)
 # ============================================================
 
 with a1:
-
-    fig = px.histogram(
-        df,
-        x="bpm",
-        nbins=35,
-        title="BPM Distribution"
-    )
+    fig = px.histogram(df, x="bpm", nbins=35, title="BPM Distribution")
 
     fig.update_layout(
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)"
+        plot_bgcolor="rgba(0,0,0,0)",
     )
 
-    st.plotly_chart(
-        fig,
-        use_container_width=True
-    )
+    st.plotly_chart(fig, use_container_width=True)
 
 # ============================================================
 # DANCEABILITY SCATTER
 # ============================================================
 
 with a2:
-
     fig2 = px.scatter(
         df,
         x="bpm",
         y="danceability",
         hover_name="track_name",
-        title="Danceability vs BPM"
+        title="Danceability vs BPM",
     )
 
     fig2.update_layout(
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)"
+        plot_bgcolor="rgba(0,0,0,0)",
     )
 
-    st.plotly_chart(
-        fig2,
-        use_container_width=True
-    )
+    st.plotly_chart(fig2, use_container_width=True)
 
 # ============================================================
 # CLAP TAG CLOUD
 # ============================================================
 
 if "clap_matches" in df.columns:
-
     all_tags = []
 
     for matches in df["clap_matches"]:
-
         if isinstance(matches, list):
-
-            all_tags.extend([
-                x.get("description", "")
-                for x in matches
-            ])
+            all_tags.extend([x.get("description", "") for x in matches])
 
     counts = Counter(all_tags)
 
-    cloud_df = pd.DataFrame(
-        counts.items(),
-        columns=["Tag", "Count"]
-    ).sort_values(
-        by="Count",
-        ascending=False
+    cloud_df = pd.DataFrame(counts.items(), columns=["Tag", "Count"]).sort_values(
+        by="Count", ascending=False
     )
 
     st.markdown("## ☁ Semantic Mood Space")
 
-    fig3 = px.treemap(
-        cloud_df.head(30),
-        path=["Tag"],
-        values="Count"
-    )
+    fig3 = px.treemap(cloud_df.head(30), path=["Tag"], values="Count")
 
-    fig3.update_layout(
-        template="plotly_dark",
-        paper_bgcolor="rgba(0,0,0,0)"
-    )
+    fig3.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)")
 
-    st.plotly_chart(
-        fig3,
-        use_container_width=True
-    )
+    st.plotly_chart(fig3, use_container_width=True)
 
 # ============================================================
 # FOOTER

@@ -1,8 +1,9 @@
-from pathlib import Path
 import json
-import torch
+from pathlib import Path
+
 import essentia.standard as es
-from transformers import AutoProcessor, AutoModel
+import torch
+from transformers import AutoModel, AutoProcessor
 
 # ====================== CONFIG ======================
 BASE_DIR = Path(__file__).parent.resolve()
@@ -16,45 +17,66 @@ print("Loading CLAP model...")
 processor = AutoProcessor.from_pretrained(MODEL_NAME)
 model = AutoModel.from_pretrained(MODEL_NAME)
 
-def get_clap_matches(audio_path: Path, top_k: int = 8):
+
+def get_clap_matches(audio_path: Path, top_k: int = 8) -> list[dict]:
     # Load audio
     audio = es.MonoLoader(filename=str(audio_path), sampleRate=48000)()
-    
+
     # Audio embedding
     audio_input = processor(audio=audio, return_tensors="pt", sampling_rate=48000)
     with torch.no_grad():
         audio_output = model.get_audio_features(**audio_input)
-        
+
         # Extract the actual tensor (this is the fix)
-        if hasattr(audio_output, 'audio_embeds'):
+        if hasattr(audio_output, "audio_embeds"):
             audio_emb = audio_output.audio_embeds
-        elif hasattr(audio_output, 'pooler_output'):
+        elif hasattr(audio_output, "pooler_output"):
             audio_emb = audio_output.pooler_output
         elif torch.is_tensor(audio_output):
             audio_emb = audio_output
         else:
-            audio_emb = audio_output[0] if isinstance(audio_output, (list, tuple)) else audio_output
+            audio_emb = (
+                audio_output[0]
+                if isinstance(audio_output, (list, tuple))
+                else audio_output
+            )
 
     # Text embedding
     candidates = [
-        "energetic electronic dance music", "deep house", "techno", "melodic techno",
-        "progressive house", "uplifting trance", "festival mainstage banger",
-        "dark techno", "vocal house", "bass house", "chill ambient", "90s rave",
-        "psychedelic trance", "goa trance", "full-on psytrance", "high energy EDM"
+        "energetic electronic dance music",
+        "deep house",
+        "techno",
+        "melodic techno",
+        "progressive house",
+        "uplifting trance",
+        "festival mainstage banger",
+        "dark techno",
+        "vocal house",
+        "bass house",
+        "chill ambient",
+        "90s rave",
+        "psychedelic trance",
+        "goa trance",
+        "full-on psytrance",
+        "high energy EDM",
     ]
 
     text_input = processor(text=candidates, return_tensors="pt", padding=True)
     with torch.no_grad():
         text_output = model.get_text_features(**text_input)
-        
-        if hasattr(text_output, 'text_embeds'):
+
+        if hasattr(text_output, "text_embeds"):
             text_emb = text_output.text_embeds
-        elif hasattr(text_output, 'pooler_output'):
+        elif hasattr(text_output, "pooler_output"):
             text_emb = text_output.pooler_output
         elif torch.is_tensor(text_output):
             text_emb = text_output
         else:
-            text_emb = text_output[0] if isinstance(text_output, (list, tuple)) else text_output
+            text_emb = (
+                text_output[0]
+                if isinstance(text_output, (list, tuple))
+                else text_output
+            )
 
     # Cosine similarity
     similarities = torch.nn.functional.cosine_similarity(audio_emb, text_emb, dim=1)
