@@ -1,0 +1,25 @@
+docs/setup.md
+  s_803d2a0b50aaea::t_1e308e8320016d 5,10,18,26-27,29-33
+  s_803d2a0b50aaea::t_bda34f80deec74 1-4,6-9,11-17,19-25,28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "7ece3d1546066e30d7f602fd28c016570c2bfee2",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_803d2a0b50aaea": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "501b7181-5828-4312-b3cb-3778b80c1feb",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
