@@ -1,0 +1,26 @@
+src/music_analysis/features.py
+  s_55c8fbb2c12ffc::t_55d48da1e65ba4 69-72
+  s_55c8fbb2c12ffc::t_ac2bb1934c993d 25-42,44-50
+  h_b891736ee508d1 43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "c7f92e96fe78f53a8382f9e6f610bd19bbdf2744",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_55c8fbb2c12ffc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f835ccfe-8bf7-4dbf-b9f5-79656f8eda00",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
