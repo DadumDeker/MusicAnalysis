@@ -125,13 +125,10 @@ Most scripts have a clear CONFIG section at the top with paths and toggles:
 
 ## Current Limitations & Known Issues
 
-- Script name mismatch: run_pipeline.py calls add_clap.py
-  but the file is named CLAPprocess.py. Pipeline will fail until fixed.
 - Audio path inconsistency: Dashboard looks for audio in audio_raw/,
   but processed files live in audio_processed/.
 - Semantic search is not yet vector-based: dashboard.py and search_tracks.py
   use fuzzy text matching + random scoring. The FAISS index exists but is not integrated.
-- No requirements.txt yet.
 - Embeddings functionality note: I was unable to get the deep embeddings
   (EffNet, VGGish, and full CLAP audio embeddings)
   to function reliably in the current setup.
