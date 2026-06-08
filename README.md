@@ -1,5 +1,9 @@
 # MusicAnalysis
 
+## Setup
+
+See [docs/setup.md](docs/setup.md).
+
 # Music Intelligence
 
 Semantic Discovery - Smart Playlists - Audio Intelligence - CLAP + Essentia Pipeline
