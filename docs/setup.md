@@ -1,8 +1,14 @@
 # Setup
 
+## Prerequisites
+
+- [`uv`](https://docs.astral.sh/uv/) - Python package manager
+- `wget` - used by `pull_models.sh`
+
+## Install Deps
+
 ```bash
 uv sync
-wget  # required for pull_models.sh
 ```
 
 ## scripts/pull_models.sh
