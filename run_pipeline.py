@@ -1,5 +1,4 @@
 import subprocess
-import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -42,7 +41,7 @@ def run_script(script_path: Path, stage_name: str) -> bool:
     log(f"Starting {stage_name}...")
     try:
         result = subprocess.run(
-            [sys.executable, str(script_path)],
+            ["uv", "run", "python", str(script_path)],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
