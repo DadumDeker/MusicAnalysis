@@ -1,0 +1,19 @@
+.pre-commit-config.yaml
+  s_a55c7cfd032d3e::t_da90ed09dc130f 17,20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "e427da87fb8990dc347ee9675e38e2b6099b3ce2",
+  "prompts": {},
+  "sessions": {
+    "s_a55c7cfd032d3e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e9d78a02-3ee3-45a2-9e14-6d8e82bc5524",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
