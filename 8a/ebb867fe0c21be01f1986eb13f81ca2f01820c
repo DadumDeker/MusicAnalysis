@@ -1,0 +1,27 @@
+uv.lock
+  s_4bbd6b6a36ab5c::t_a9e8dda982d6f6 553-567,634-654,817,823,830-835,843,849,856,859-861,1584-1606
+pyproject.toml
+  h_b891736ee508d1 11,17,24,28
+  s_4bbd6b6a36ab5c::t_d9a060115ba9c3 26-27,29-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "8aebb867fe0c21be01f1986eb13f81ca2f01820c",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_4bbd6b6a36ab5c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b130316d-4219-4901-9942-64c88d39165a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
