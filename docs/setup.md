@@ -37,3 +37,11 @@ uv run scripts/download_samples.py [OPTIONS]
 | `--min-length` | `30.0` | Min duration (seconds) |
 | `--max-length` | `300.0` | Max duration (seconds) |
 | `--max-size` | `104857600` | Max file size (bytes) |
+
+## (Optional) scripts/gen_essentia_stubs.py
+
+Generates type stubs for `essentia.standard` into `stubs/`.
+
+```bash
+uv run python scripts/gen_essentia_stubs.py
+```

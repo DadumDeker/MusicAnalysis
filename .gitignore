@@ -3,3 +3,7 @@ audio_raw/*
 logs/*
 metadata/*
 models/*
+stubs/
+
+__pycache__
+*.egg-info

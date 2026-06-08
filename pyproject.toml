@@ -67,3 +67,6 @@ known-third-party = []
 [tool.pyright]
 typeCheckingMode = "basic"
 stubPath = "stubs"
+
+[tool.ty.environment]
+extra-paths = ["stubs"]
