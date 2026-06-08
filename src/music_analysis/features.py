@@ -22,6 +22,32 @@ class Features:
     vggish_embedding: list[float] = field(default_factory=list)
     clap_matches: list[dict] = field(default_factory=list)
 
+    @property
+    def musical_key(self) -> str | None:
+        if self.key is None:
+            return None
+        if self.scale is None:
+            return self.key
+        return f"{self.key} {self.scale}"
+
+    @property
+    def is_complete(self) -> bool:
+        return all(
+            v is not None
+            for v in (
+                self.bpm,
+                self.key,
+                self.scale,
+                self.key_strength,
+                self.loudness,
+                self.danceability,
+            )
+        )
+
+    @property
+    def has_embeddings(self) -> bool:
+        return bool(self.effnet_embedding) and bool(self.vggish_embedding)
+
     def to_dict(self) -> dict:
         return asdict(self)
 
@@ -40,3 +66,7 @@ class Features:
     @classmethod
     def load(cls, path: Path) -> Features:
         return cls.from_dict(json.loads(path.read_text(encoding="utf-8")))
+
+    @classmethod
+    def load_dir(cls, directory: Path) -> list[Features]:
+        return [cls.load(p) for p in sorted(directory.glob("*.json"))]
