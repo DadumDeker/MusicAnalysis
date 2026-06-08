@@ -1,0 +1,22 @@
+EssentiaProcess.py
+  h_b891736ee508d1 2-3,19-21,23,82
+CLAPprocess.py
+  h_b891736ee508d1 2-3,5-6,21,24,29,31,33,38,42,61,67-68,70,75,79
+preprocess.py
+  h_b891736ee508d1 2,5,25,62,100
+dashboard.py
+  h_b891736ee508d1 20,23-25,27,141-143,151,171,188,205-207,214-216,261-263,287,293,344,365,373,384,393,402,425,429,433,438,442,451,471,486,492,531
+run_pipeline.py
+  h_b891736ee508d1 4,26-27,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "8a96d3dcba741a373d84ab0c01b25a8fbd2be05a",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
