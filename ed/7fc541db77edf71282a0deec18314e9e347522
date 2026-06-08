@@ -1,0 +1,34 @@
+dashboard.py
+  s_47f314379cf855::t_bce0648405c21d 28
+src/music_analysis/features.py
+  s_47f314379cf855::t_2e232879f874a2 1-42
+CLAPprocess.py
+  s_47f314379cf855::t_bce0648405c21d 7
+EssentiaProcess.py
+  s_47f314379cf855::t_bce0648405c21d 6
+build_vector_db.py
+  s_47f314379cf855::t_bce0648405c21d 8
+search_tracks.py
+  s_47f314379cf855::t_bce0648405c21d 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ed7fc541db77edf71282a0deec18314e9e347522",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_47f314379cf855": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1d49a869-b82c-433b-b6b7-a7bbf6b18fd4",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
