@@ -1,0 +1,19 @@
+README.md
+  s_a55c7cfd032d3e::t_8f94e7e273cb2b 7,11-16,23-26,28-29,36,70,78,82-83,92,109-112,119,128-133,135-139,141-142,151-154,157
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "0d1d2bcf06632f9b5d3e9b481da7980812541e74",
+  "prompts": {},
+  "sessions": {
+    "s_a55c7cfd032d3e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e9d78a02-3ee3-45a2-9e14-6d8e82bc5524",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
