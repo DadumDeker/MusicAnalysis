@@ -1,0 +1,40 @@
+build_vector_db.py
+  s_a6c446d5ead288::t_adf79d3af5a47a 8
+  s_a6c446d5ead288::t_887cd1aa492c55 25,27,31,41
+CLAPprocess.py
+  s_a6c446d5ead288::t_91d1a8ab3737ef 7
+  s_a6c446d5ead288::t_10d8dff1b2386e 98,100,105-107,109
+EssentiaProcess.py
+  s_a6c446d5ead288::t_11c288c45e14cd 21,27,34-39,52,55,70,78-79
+  s_a6c446d5ead288::t_9dcb18766b5cbd 6
+dashboard.py
+  s_a6c446d5ead288::t_86019c31e6ad6b 28
+  s_a6c446d5ead288::t_5a82400b6cbe2b 158,160-164,166-167,169-172,174-175,177,179,181
+features.py
+  s_a6c446d5ead288::t_5fe6be4d050097 23
+  s_a6c446d5ead288::t_0e4001918e7329 1-22,24-42
+search_tracks.py
+  s_a6c446d5ead288::t_84c53650c0098f 7-8
+  s_a6c446d5ead288::t_231f8a24d5c3ba 27-28,44-45,47-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "48fd87b19e832cac0be35b431dfa8f77588962bb",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_a6c446d5ead288": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "88d2a1a6-f163-476d-aaa7-ea50a5b0f742",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
