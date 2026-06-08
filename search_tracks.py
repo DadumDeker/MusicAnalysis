@@ -4,7 +4,7 @@ from pathlib import Path
 import faiss
 import numpy as np
 
-from features import Features
+from music_analysis.features import Features
 
 # ====================== CONFIG ======================
 BASE_DIR = Path(__file__).parent.resolve()

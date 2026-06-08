@@ -5,7 +5,7 @@ import faiss
 import numpy as np
 from tqdm import tqdm
 
-from features import Features
+from music_analysis.features import Features
 
 BASE_DIR = Path(__file__).parent.resolve()
 METADATA_DIR = BASE_DIR / "metadata"

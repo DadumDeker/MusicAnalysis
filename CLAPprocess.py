@@ -4,7 +4,7 @@ import essentia.standard as es
 import torch
 from transformers import AutoModel, AutoProcessor
 
-from features import Features
+from music_analysis.features import Features
 
 # ====================== CONFIG ======================
 BASE_DIR = Path(__file__).parent.resolve()

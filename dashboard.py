@@ -25,7 +25,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from features import Features
+from music_analysis.features import Features
 
 # ============================================================
 # PAGE CONFIG
