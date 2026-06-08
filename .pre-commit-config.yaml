@@ -10,3 +10,10 @@ repos:
       - id: ruff-check
         args: [--fix]
       - id: ruff-format
+  - repo: local
+    hooks:
+      - id: rumdl
+        name: rumdl
+        language: system
+        entry: rumdl
+        types: [markdown]
