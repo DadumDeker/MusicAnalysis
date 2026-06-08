@@ -1,0 +1,48 @@
+pyproject.toml
+  s_4bbd6b6a36ab5c::t_b9837cd98ac926 16
+uv.lock
+  s_4bbd6b6a36ab5c::t_b9837cd98ac926 849,877,1406-1419
+scripts/download_samples.py
+  s_4bbd6b6a36ab5c::t_d67382d4929534 33
+  s_4bbd6b6a36ab5c::t_76d15acfa5e5e6 50-52
+  h_b891736ee508d1 5,13-14,18-19,45,86,122,199-200,240,244,248,262-265,280,296-297,320,323
+  s_4bbd6b6a36ab5c::t_624aa65636cfb4 218
+  s_4bbd6b6a36ab5c::t_7c2c9ac61f27d7 9,15,25,151-154,156,158,160,164-172,174-186,191-192,209-210,212-213,216-217,221-228,250-253,284-286,291-292,299,308-309,325,329,331
+  s_4bbd6b6a36ab5c::t_ca3be7418a5a97 8,12
+  s_4bbd6b6a36ab5c::t_f388194105a01c 20-21,53-55,61-69,75-81,145,155,157,159,173,201,211,219-220,300-307,310-319,330
+  s_4bbd6b6a36ab5c::t_5bbc0c350526ee 326-328
+  s_4bbd6b6a36ab5c::t_9ab1c0c3efed38 128-129
+  s_4bbd6b6a36ab5c::t_e17c564fcae82d 125
+  s_4bbd6b6a36ab5c::t_76f84f706a8c71 1-2,4,6,10-11,17,22-24,26-27,29-32,34-44,47-49,82-85,87-92,121,123-124,127,131-133,136-137,139-141,143-144,148-150,229-235,237-239,241-243,245-247,249,266-267,269-270,276-279,281-283,287-290,293,332-335
+  s_4bbd6b6a36ab5c::t_8ad9a891a1ba13 56-57,59,70-71,73
+  s_4bbd6b6a36ab5c::t_6ac5cc73dd84b6 3,7,16,100-120,161-162,187-190,198,202-208,254-261,268,294-295,298,321-322
+  s_4bbd6b6a36ab5c::t_04558b0cf882d6 93-99,130,138,142,146-147
+  s_4bbd6b6a36ab5c::t_85cd9d8e5e7e37 126,134-135
+  s_4bbd6b6a36ab5c::t_3640842e64db0f 28
+  s_4bbd6b6a36ab5c::t_1c7fd93e8fcb81 236
+  s_4bbd6b6a36ab5c::t_1f59e0756b4064 271-275
+  s_4bbd6b6a36ab5c::t_29bd40d8fb95d6 60,74
+  s_4bbd6b6a36ab5c::t_3b15d9b7655fd6 163
+  s_4bbd6b6a36ab5c::t_0c163a7a042feb 194-196
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "d3fdf4725948b9e067e975941a83a8d6fa14be36",
+  "prompts": {},
+  "humans": {
+    "h_b891736ee508d1": {
+      "author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  },
+  "sessions": {
+    "s_4bbd6b6a36ab5c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b130316d-4219-4901-9942-64c88d39165a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Josh Dean <joshua.dean1@ecolab.com>"
+    }
+  }
+}
