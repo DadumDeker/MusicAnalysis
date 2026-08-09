@@ -2,7 +2,11 @@
 # /// script
 # dependencies = ["internetarchive", "typer", "rich", "psutil", "static-ffmpeg"]
 # ///
-"""Download public-domain audio samples from the Internet Archive."""
+"""
+Download public-domain audio samples from the Internet Archive.
+
+TODO (joshua-dean1_ecolab): Pull metadata to inform tagging
+"""
 
 import subprocess
 import urllib.request
